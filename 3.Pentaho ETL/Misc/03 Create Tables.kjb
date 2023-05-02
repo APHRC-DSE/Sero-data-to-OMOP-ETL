@@ -1,0 +1,2026 @@
+<job>
+  <name>03 Create Tables</name>
+  <description>Written by: Tathagata Bhattacharjee</description>
+  <extended_description>This Pentaho Job is written by Tathagata Bhattacharjee</extended_description>
+  <job_version/>
+  <job_status>0</job_status>
+  <directory>/Misc</directory>
+  <created_user>-</created_user>
+  <created_date>2023/02/22 13:16:12.850</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2023/04/28 00:21:01.478</modified_date>
+  <parameters>
+    </parameters>
+  <connection>
+    <name>survey_connection</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>HDSS</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc86aa7f285a910bd718fcbf783</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <size_limit_lines/>
+    <interval/>
+    <timeout_days/>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>Start</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>80</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set variables</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <attributes/>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>cdm_schema</variable_name>
+          <variable_value>omop_6_0</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>staging</variable_name>
+          <variable_value>staging</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>survey</variable_name>
+          <variable_value>survey</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>80</xloc>
+      <yloc>224</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL - Creating sero data DDL</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>--staging schema : For creating additional columns
+
+CREATE SCHEMA IF NOT EXISTS ${staging}
+AUTHORIZATION postgres;
+
+
+DROP TABLE IF EXISTS ${staging}.serodata_staging;
+
+CREATE TABLE IF NOT EXISTS ${staging}.serodata_staging
+(
+studyid	integer,
+q8_gender	character varying (150)	,
+q7_birth_date	date,
+today_date	date,
+q7_age	integer,
+age_group	character varying (150)	,
+age_strata	character varying (150)	,
+sample_type	character varying (150)	,
+q9_location	character varying (150)	,
+q5_status	character varying (150)	,
+consent	character varying (150)	,
+reason_no_consent	character varying (150)	,
+date_updated	DATE,
+created_date	DATE	,
+week	integer,
+replace	character varying (150)	,
+q6_education_level	character varying (150)	,
+q6_religion	character varying (150)	,
+q10_covid_contact	character varying (150)	,
+q10_contact_month	character varying (150)	,
+q10_contact_year	character varying (150)	,
+q11_fever	character varying (150)	,
+q11_shortness_breath	character varying (150)	,
+q11_pain	character varying (150)	,
+q11_weakness	character varying (150)	,
+q11_diarrhoea	character varying (150)	,
+q11_cough	character varying (150)	,
+q11_nausea	character varying (150)	,
+q11_sore_throat	character varying (150)	,
+q11_headache	character varying (150)	,
+q11_runny_nose	character varying (150)	,
+q11_irritability	character varying (150)	,
+q11_lost_smell	character varying (150)	,
+q11_other_symptom	character varying (150)	,
+q11_symptom_specified	character varying (150)	,
+q11_unknown	character varying (150)	,
+q11_no_symptoms	character varying (150)	,
+q11_muscular_pain	character varying (150)	,
+q11_chest_pain	character varying (150)	,
+q11_abdominal_pain	character varying (150)	,
+q11_joint_pain	character varying (150)	,
+q12_medical_attention	character varying (150)	,
+q12_miss_work	character varying (150)	,
+q12_hospitalized	character varying (150)	,
+q21_bcg_scar	character varying (150)	,
+q23_sampling	character varying (150)	,
+q16_info_edu	character varying (150)	,
+q16_hand_wash	character varying (150)	,
+q16_face_masks	character varying (150)	,
+q16_sanitizers	character varying (150)	,
+q16_own_risk	character varying (150)	,
+q13_hhmember_sick	character varying (150)	,
+q13_hhm_fever	character varying (150)	,
+q13_hhm_shortness_breath	character varying (150)	,
+q13_hhm_pain	character varying (150)	,
+q13_hhm_weakness	character varying (150)	,
+q13_hhm_diarrhoea	character varying (150)	,
+q13_hhm_cough	character varying (150)	,
+q13_hhm_nausea	character varying (150)	,
+q13_hhm_sore_throat	character varying (150)	,
+q13_hhm_headache	character varying (150)	,
+q13_hhm_runny_nose	character varying (150)	,
+q13_hhm_irritability	character varying (150)	,
+q13_hhm_lost_smell	character varying (150)	,
+q13_hhm_other_symptom	character varying (150)	,
+q13_hhm_no_symptoms	character varying (150)	,
+q13_hhm_unknown	character varying (150)	,
+q13_hhm_symptom_specified	character varying (150)	,
+q13_hhm_muscular_pain	character varying (150)	,
+q13_hhm_chest_pain	character varying (150)	,
+q13_hhm_abdominal_pain	character varying (150)	,
+q13_hhm_joint_pain	character varying (150)	,
+q13_hhm_symptoms_cause	character varying (150)	,
+q14_hhm_medical_attention	character varying (150)	,
+q14_hhm_miss_work	character varying (150)	,
+q14_hhm_hospitalized	character varying (150)	,
+q15_hhm_died	character varying (150)	,
+q17_electricity	character varying (150)	,
+q17_television	character varying (150)	,
+q17_sofa	character varying (150)	,
+q17_cupboard	character varying (150)	,
+q17_dvd_player	character varying (150)	,
+q17_radio	character varying (150)	,
+q17_tables	character varying (150)	,
+q17_clock	character varying (150)	,
+q17_none	character varying (150)	,
+q17_floor_type	character varying (150)	,
+q17_wall_type	character varying (150)	,
+q17_roof_type	character varying (150)	,
+q17_fuel_type	character varying (150)	,
+q17_toilet_type	character varying (150)	,
+q18_outmigrant_member	character varying (150)	,
+q18_outmigrant_dest	character varying (150)	,
+q18_outmigration_reason	character varying (150)	,
+q18_inmigrant_member	character varying (150)	,
+q18_inmigrant_origin	character varying (150)	,
+q18_inmigration_reason	character varying (150)	,
+q19_lost_job	character varying (150)	,
+q19_reason_joblost	character varying (150)	,
+q20_healthcare_access	character varying (150)	,
+q20_missed_service_reason	character varying (150)	,
+q20_services_missed	character varying (150)	,
+q22_vaccine_records	character varying (150)	,
+q22_reason_nocard	character varying (150)	,
+q24_sample_collected	character varying (150)	,
+fk_study	character varying (150)	,
+reason_not_collected	character varying (150)	,
+sample_date_collected	character varying (150)	,
+blood_group	character varying (150)	,
+covid_vaccine	character varying (150)	,
+covid_vac_type	character varying (150)	,
+covid_vac_type_spy	character varying (150)	,
+bcg_confirm	character varying (150)	,
+penta1_confirm	character varying (150)	,
+penta2_confirm	character varying (150)	,
+penta3_confirm	character varying (150)	,
+pcv1_confirm	character varying (150)	,
+pcv2_confirm	character varying (150)	,
+pcv3_confirm	character varying (150)	,
+mcv1_confirm	character varying (150)	,
+mcv2_confirm	character varying (150)	,
+bcg	character varying (150)	,
+penta1	character varying (150)	,
+penta2	character varying (150)	,
+penta3	character varying (150)	,
+pcv1	character varying (150)	,
+pcv2	character varying (150)	,
+pcv3	character varying (150)	,
+mcv1	character varying (150)	,
+mcv2	character varying (150)	,
+bcg_date	character varying (150)		,
+penta1_date	character varying (150)		,
+penta2_date	character varying (150)		,
+penta3_date	character varying (150)		,
+pcv1_date	character varying (150)		,
+pcv2_date	character varying (150)		,
+pcv3_date	character varying (150)		,
+mcv1_date	character varying (150)		,
+mcv2_date	character varying (150)		,
+spike_negod	REAL	,
+spikeodratio	REAL	,
+spikepos	character varying (150)	,
+latitude	REAL	,
+longitude	REAL,
+provider_id integer,
+location_id integer,
+person_id integer
+
+)
+
+TABLESPACE pg_default;
+
+---------------------------------------------------
+
+CREATE SCHEMA IF NOT EXISTS ${staging}
+AUTHORIZATION postgres;
+
+
+DROP TABLE IF EXISTS ${staging}.serodata_one;
+
+CREATE TABLE IF NOT EXISTS ${staging}.serodata_one
+(
+studyid	integer,
+q8_gender	character varying (150)	,
+q7_birth_date	date,
+today_date	date,
+q7_age	integer,
+age_group	character varying (150)	,
+age_strata	character varying (150)	,
+sample_type	character varying (150)	,
+q9_location	character varying (150)	,
+q5_status	character varying (150)	,
+consent	character varying (150)	,
+reason_no_consent	character varying (150)	,
+date_updated	DATE,
+created_date	DATE	,
+week	integer,
+replace	character varying (150)	,
+q6_education_level	character varying (150)	,
+q6_religion	character varying (150)	,
+q10_covid_contact	character varying (150)	,
+q10_contact_month	character varying (150)	,
+q10_contact_year	character varying (150)	,
+q11_fever	character varying (150)	,
+q11_shortness_breath	character varying (150)	,
+q11_pain	character varying (150)	,
+q11_weakness	character varying (150)	,
+q11_diarrhoea	character varying (150)	,
+q11_cough	character varying (150)	,
+q11_nausea	character varying (150)	,
+q11_sore_throat	character varying (150)	,
+q11_headache	character varying (150)	,
+q11_runny_nose	character varying (150)	,
+q11_irritability	character varying (150)	,
+q11_lost_smell	character varying (150)	,
+q11_other_symptom	character varying (150)	,
+q11_symptom_specified	character varying (150)	,
+q11_unknown	character varying (150)	,
+q11_no_symptoms	character varying (150)	,
+q11_muscular_pain	character varying (150)	,
+q11_chest_pain	character varying (150)	,
+q11_abdominal_pain	character varying (150)	,
+q11_joint_pain	character varying (150)	,
+q12_medical_attention	character varying (150)	,
+q12_miss_work	character varying (150)	,
+q12_hospitalized	character varying (150)	,
+q21_bcg_scar	character varying (150)	,
+q23_sampling	character varying (150)	,
+q16_info_edu	character varying (150)	,
+q16_hand_wash	character varying (150)	,
+q16_face_masks	character varying (150)	,
+q16_sanitizers	character varying (150)	,
+q16_own_risk	character varying (150)	,
+q13_hhmember_sick	character varying (150)	,
+q13_hhm_fever	character varying (150)	,
+q13_hhm_shortness_breath	character varying (150)	,
+q13_hhm_pain	character varying (150)	,
+q13_hhm_weakness	character varying (150)	,
+q13_hhm_diarrhoea	character varying (150)	,
+q13_hhm_cough	character varying (150)	,
+q13_hhm_nausea	character varying (150)	,
+q13_hhm_sore_throat	character varying (150)	,
+q13_hhm_headache	character varying (150)	,
+q13_hhm_runny_nose	character varying (150)	,
+q13_hhm_irritability	character varying (150)	,
+q13_hhm_lost_smell	character varying (150)	,
+q13_hhm_other_symptom	character varying (150)	,
+q13_hhm_no_symptoms	character varying (150)	,
+q13_hhm_unknown	character varying (150)	,
+q13_hhm_symptom_specified	character varying (150)	,
+q13_hhm_muscular_pain	character varying (150)	,
+q13_hhm_chest_pain	character varying (150)	,
+q13_hhm_abdominal_pain	character varying (150)	,
+q13_hhm_joint_pain	character varying (150)	,
+q13_hhm_symptoms_cause	character varying (150)	,
+q14_hhm_medical_attention	character varying (150)	,
+q14_hhm_miss_work	character varying (150)	,
+q14_hhm_hospitalized	character varying (150)	,
+q15_hhm_died	character varying (150)	,
+q17_electricity	character varying (150)	,
+q17_television	character varying (150)	,
+q17_sofa	character varying (150)	,
+q17_cupboard	character varying (150)	,
+q17_dvd_player	character varying (150)	,
+q17_radio	character varying (150)	,
+q17_tables	character varying (150)	,
+q17_clock	character varying (150)	,
+q17_none	character varying (150)	,
+q17_floor_type	character varying (150)	,
+q17_wall_type	character varying (150)	,
+q17_roof_type	character varying (150)	,
+q17_fuel_type	character varying (150)	,
+q17_toilet_type	character varying (150)	,
+q18_outmigrant_member	character varying (150)	,
+q18_outmigrant_dest	character varying (150)	,
+q18_outmigration_reason	character varying (150)	,
+q18_inmigrant_member	character varying (150)	,
+q18_inmigrant_origin	character varying (150)	,
+q18_inmigration_reason	character varying (150)	,
+q19_lost_job	character varying (150)	,
+q19_reason_joblost	character varying (150)	,
+q20_healthcare_access	character varying (150)	,
+q20_missed_service_reason	character varying (150)	,
+q20_services_missed	character varying (150)	,
+q22_vaccine_records	character varying (150)	,
+q22_reason_nocard	character varying (150)	,
+q24_sample_collected	character varying (150)	,
+fk_study	character varying (150)	,
+reason_not_collected	character varying (150)	,
+sample_date_collected	character varying (150)	,
+blood_group	character varying (150)	,
+covid_vaccine	character varying (150)	,
+covid_vac_type	character varying (150)	,
+covid_vac_type_spy	character varying (150)	,
+bcg_confirm	character varying (150)	,
+penta1_confirm	character varying (150)	,
+penta2_confirm	character varying (150)	,
+penta3_confirm	character varying (150)	,
+pcv1_confirm	character varying (150)	,
+pcv2_confirm	character varying (150)	,
+pcv3_confirm	character varying (150)	,
+mcv1_confirm	character varying (150)	,
+mcv2_confirm	character varying (150)	,
+bcg	character varying (150)	,
+penta1	character varying (150)	,
+penta2	character varying (150)	,
+penta3	character varying (150)	,
+pcv1	character varying (150)	,
+pcv2	character varying (150)	,
+pcv3	character varying (150)	,
+mcv1	character varying (150)	,
+mcv2	character varying (150)	,
+bcg_date	character varying (150)		,
+penta1_date	character varying (150)		,
+penta2_date	character varying (150)		,
+penta3_date	character varying (150)		,
+pcv1_date	character varying (150)		,
+pcv2_date	character varying (150)		,
+pcv3_date	character varying (150)		,
+mcv1_date	character varying (150)		,
+mcv2_date	character varying (150)		,
+spike_negod	REAL	,
+spikeodratio	REAL	,
+spikepos	character varying (150)	,
+latitude	REAL	,
+longitude	REAL,
+provider_id integer,
+location_id integer,
+person_id integer
+
+)
+
+TABLESPACE pg_default;
+
+
+
+
+
+--------------------------------------------------
+
+CREATE SCHEMA IF NOT EXISTS ${survey}
+AUTHORIZATION postgres;
+
+
+
+DROP TABLE IF EXISTS ${survey}.serodata;
+
+CREATE TABLE IF NOT EXISTS ${survey}.serodata
+(
+studyid	integer,
+q8_gender	character varying (150)	,
+q7_birth_date	date,
+today_date	date,
+q7_age	integer,
+age_group	character varying (150)	,
+age_strata	character varying (150)	,
+sample_type	character varying (150)	,
+q9_location	character varying (150)	,
+q5_status	character varying (150)	,
+consent	character varying (150)	,
+reason_no_consent	character varying (150)	,
+date_updated	DATE,
+created_date	DATE	,
+week	integer,
+replace	character varying (150)	,
+q6_education_level	character varying (150)	,
+q6_religion	character varying (150)	,
+q10_covid_contact	character varying (150)	,
+q10_contact_month	character varying (150)	,
+q10_contact_year	character varying (150)	,
+q11_fever	character varying (150)	,
+q11_shortness_breath	character varying (150)	,
+q11_pain	character varying (150)	,
+q11_weakness	character varying (150)	,
+q11_diarrhoea	character varying (150)	,
+q11_cough	character varying (150)	,
+q11_nausea	character varying (150)	,
+q11_sore_throat	character varying (150)	,
+q11_headache	character varying (150)	,
+q11_runny_nose	character varying (150)	,
+q11_irritability	character varying (150)	,
+q11_lost_smell	character varying (150)	,
+q11_other_symptom	character varying (150)	,
+q11_symptom_specified	character varying (150)	,
+q11_unknown	character varying (150)	,
+q11_no_symptoms	character varying (150)	,
+q11_muscular_pain	character varying (150)	,
+q11_chest_pain	character varying (150)	,
+q11_abdominal_pain	character varying (150)	,
+q11_joint_pain	character varying (150)	,
+q12_medical_attention	character varying (150)	,
+q12_miss_work	character varying (150)	,
+q12_hospitalized	character varying (150)	,
+q21_bcg_scar	character varying (150)	,
+q23_sampling	character varying (150)	,
+q16_info_edu	character varying (150)	,
+q16_hand_wash	character varying (150)	,
+q16_face_masks	character varying (150)	,
+q16_sanitizers	character varying (150)	,
+q16_own_risk	character varying (150)	,
+q13_hhmember_sick	character varying (150)	,
+q13_hhm_fever	character varying (150)	,
+q13_hhm_shortness_breath	character varying (150)	,
+q13_hhm_pain	character varying (150)	,
+q13_hhm_weakness	character varying (150)	,
+q13_hhm_diarrhoea	character varying (150)	,
+q13_hhm_cough	character varying (150)	,
+q13_hhm_nausea	character varying (150)	,
+q13_hhm_sore_throat	character varying (150)	,
+q13_hhm_headache	character varying (150)	,
+q13_hhm_runny_nose	character varying (150)	,
+q13_hhm_irritability	character varying (150)	,
+q13_hhm_lost_smell	character varying (150)	,
+q13_hhm_other_symptom	character varying (150)	,
+q13_hhm_no_symptoms	character varying (150)	,
+q13_hhm_unknown	character varying (150)	,
+q13_hhm_symptom_specified	character varying (150)	,
+q13_hhm_muscular_pain	character varying (150)	,
+q13_hhm_chest_pain	character varying (150)	,
+q13_hhm_abdominal_pain	character varying (150)	,
+q13_hhm_joint_pain	character varying (150)	,
+q13_hhm_symptoms_cause	character varying (150)	,
+q14_hhm_medical_attention	character varying (150)	,
+q14_hhm_miss_work	character varying (150)	,
+q14_hhm_hospitalized	character varying (150)	,
+q15_hhm_died	character varying (150)	,
+q17_electricity	character varying (150)	,
+q17_television	character varying (150)	,
+q17_sofa	character varying (150)	,
+q17_cupboard	character varying (150)	,
+q17_dvd_player	character varying (150)	,
+q17_radio	character varying (150)	,
+q17_tables	character varying (150)	,
+q17_clock	character varying (150)	,
+q17_none	character varying (150)	,
+q17_floor_type	character varying (150)	,
+q17_wall_type	character varying (150)	,
+q17_roof_type	character varying (150)	,
+q17_fuel_type	character varying (150)	,
+q17_toilet_type	character varying (150)	,
+q18_outmigrant_member	character varying (150)	,
+q18_outmigrant_dest	character varying (150)	,
+q18_outmigration_reason	character varying (150)	,
+q18_inmigrant_member	character varying (150)	,
+q18_inmigrant_origin	character varying (150)	,
+q18_inmigration_reason	character varying (150)	,
+q19_lost_job	character varying (150)	,
+q19_reason_joblost	character varying (150)	,
+q20_healthcare_access	character varying (150)	,
+q20_missed_service_reason	character varying (150)	,
+q20_services_missed	character varying (150)	,
+q22_vaccine_records	character varying (150)	,
+q22_reason_nocard	character varying (150)	,
+q24_sample_collected	character varying (150)	,
+fk_study	character varying (150)	,
+reason_not_collected	character varying (150)	,
+sample_date_collected	character varying (150)	,
+blood_group	character varying (150)	,
+covid_vaccine	character varying (150)	,
+covid_vac_type	character varying (150)	,
+covid_vac_type_spy	character varying (150)	,
+bcg_confirm	character varying (150)	,
+penta1_confirm	character varying (150)	,
+penta2_confirm	character varying (150)	,
+penta3_confirm	character varying (150)	,
+pcv1_confirm	character varying (150)	,
+pcv2_confirm	character varying (150)	,
+pcv3_confirm	character varying (150)	,
+mcv1_confirm	character varying (150)	,
+mcv2_confirm	character varying (150)	,
+bcg	character varying (150)	,
+penta1	character varying (150)	,
+penta2	character varying (150)	,
+penta3	character varying (150)	,
+pcv1	character varying (150)	,
+pcv2	character varying (150)	,
+pcv3	character varying (150)	,
+mcv1	character varying (150)	,
+mcv2	character varying (150)	,
+bcg_date	character varying (150)		,
+penta1_date	character varying (150)		,
+penta2_date	character varying (150)		,
+penta3_date	character varying (150)		,
+pcv1_date	character varying (150)		,
+pcv2_date	character varying (150)		,
+pcv3_date	character varying (150)		,
+mcv1_date	character varying (150)		,
+mcv2_date	character varying (150)		,
+spike_negod	REAL	,
+spikeodratio	REAL	,
+spikepos	character varying (150)	,
+latitude	REAL	,
+longitude	REAL
+
+)
+
+TABLESPACE pg_default;
+
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>survey_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>64</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL - ${cdm_schema}.omop 6.0 Tables</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE SCHEMA IF NOT EXISTS ${cdm_schema};
+
+--CREATE SCHEMA IF NOT EXISTS ${cdm_schema};
+
+
+-- ************************
+-- Copyright 2018-08 Observational Health Data Sciences and Informatics
+--
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--     http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+
+-- ************************
+
+-- postgresql script to create OMOP common data model version 6.0
+
+-- last revised: 27-Aug-2018
+
+-- Authors:  Patrick Ryan, Christian Reich, Clair Blacketer
+
+-- Script Updated by: Tathagata Bhattacharjee to adapt to Pentaho Data Integration tool March 2023
+
+
+
+-- ************************
+-- Standardized vocabulary
+-- ************************
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.concept (
+  concept_id			INTEGER			NOT NULL ,
+  concept_name			VARCHAR(255)	NOT NULL ,
+  domain_id				VARCHAR(20)		NOT NULL ,
+  vocabulary_id			VARCHAR(20)		NOT NULL ,
+  concept_class_id		VARCHAR(20)		NOT NULL ,
+  standard_concept		VARCHAR(1)		NULL ,
+  concept_code			VARCHAR(50)		NOT NULL ,
+  valid_start_date		DATE			NOT NULL ,
+  valid_end_date		DATE			NOT NULL ,
+  invalid_reason		VARCHAR(1)		NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.vocabulary (
+  vocabulary_id			VARCHAR(20)		NOT NULL,
+  vocabulary_name		VARCHAR(255)	NOT NULL,
+  vocabulary_reference	VARCHAR(255)	NOT NULL,
+  vocabulary_version	VARCHAR(255)	NULL,
+  vocabulary_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.domain (
+  domain_id			    VARCHAR(20)		NOT NULL,
+  domain_name		    VARCHAR(255)	NOT NULL,
+  domain_concept_id		INTEGER			NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.concept_class (
+  concept_class_id			VARCHAR(20)		NOT NULL,
+  concept_class_name		VARCHAR(255)	NOT NULL,
+  concept_class_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.concept_relationship (
+  concept_id_1			INTEGER			NOT NULL,
+  concept_id_2			INTEGER			NOT NULL,
+  relationship_id		VARCHAR(20)		NOT NULL,
+  valid_start_date		DATE			NOT NULL,
+  valid_end_date		DATE			NOT NULL,
+  invalid_reason		VARCHAR(1)		NULL
+  )
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.relationship (
+  relationship_id			VARCHAR(20)		NOT NULL,
+  relationship_name			VARCHAR(255)	NOT NULL,
+  is_hierarchical			VARCHAR(1)		NOT NULL,
+  defines_ancestry			VARCHAR(1)		NOT NULL,
+  reverse_relationship_id	VARCHAR(20)		NOT NULL,
+  relationship_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.concept_synonym (
+  concept_id			INTEGER			NOT NULL,
+  concept_synonym_name	VARCHAR(1000)	NOT NULL,
+  language_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.concept_ancestor (
+  ancestor_concept_id		INTEGER		NOT NULL,
+  descendant_concept_id		INTEGER		NOT NULL,
+  min_levels_of_separation	INTEGER		NOT NULL,
+  max_levels_of_separation	INTEGER		NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.source_to_concept_map (
+  source_code				VARCHAR(50)		NOT NULL,
+  source_concept_id			INTEGER			NOT NULL,
+  source_vocabulary_id		VARCHAR(20)		NOT NULL,
+  source_code_description	VARCHAR(255)	NULL,
+  target_concept_id			INTEGER			NOT NULL,
+  target_vocabulary_id		VARCHAR(20)		NOT NULL,
+  valid_start_date			DATE			NOT NULL,
+  valid_end_date			DATE			NOT NULL,
+  invalid_reason			VARCHAR(1)		NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.drug_strength (
+  drug_concept_id				INTEGER		  	NOT NULL,
+  ingredient_concept_id			INTEGER		  	NOT NULL,
+  amount_value					NUMERIC		    NULL,
+  amount_unit_concept_id		INTEGER		  	NULL,
+  numerator_value				NUMERIC		    NULL,
+  numerator_unit_concept_id		INTEGER		  	NULL,
+  denominator_value				NUMERIC		    NULL,
+  denominator_unit_concept_id	INTEGER		  	NULL,
+  box_size						INTEGER		 	NULL,
+  valid_start_date				DATE		    NOT NULL,
+  valid_end_date				DATE		    NOT NULL,
+  invalid_reason				VARCHAR(1)  	NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.attribute_definition (
+  attribute_definition_id		  INTEGER			  NOT NULL,
+  attribute_name				      VARCHAR(255)	NOT NULL,
+  attribute_description			  TEXT	NULL,
+  attribute_type_concept_id		INTEGER			  NOT NULL,
+  attribute_syntax				    TEXT	NULL
+)
+;
+
+
+-- ************************
+-- Standardized meta-data
+-- ************************
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.cdm_source
+(
+  cdm_source_name					VARCHAR(255)	NOT NULL ,
+  cdm_source_abbreviation			VARCHAR(25)		NULL ,
+  cdm_holder						VARCHAR(255)	NULL ,
+  source_description				TEXT			NULL ,
+  source_documentation_reference	VARCHAR(255)	NULL ,
+  cdm_etl_reference					VARCHAR(255)	NULL ,
+  source_release_date				DATE			NULL ,
+  cdm_release_date					DATE			NULL ,
+  cdm_version						VARCHAR(10)		NULL ,
+  vocabulary_version				VARCHAR(20)		NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.metadata
+(
+  metadata_concept_id       INTEGER       	NOT NULL ,
+  metadata_type_concept_id  INTEGER       	NOT NULL ,
+  name                      VARCHAR(250)  	NOT NULL ,
+  value_as_string           TEXT  			NULL ,
+  value_as_concept_id       INTEGER       	NULL ,
+  metadata_date             DATE          	NULL ,
+  metadata_TIMESTAMP         TIMESTAMP      	NULL
+)
+;
+
+-- ************************
+-- Standardized clinical data
+-- ************************
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.person
+(
+  person_id						BIGINT	  	NOT NULL , 
+  gender_concept_id				INTEGER	  	NOT NULL ,
+  year_of_birth					INTEGER	  	NOT NULL ,
+  month_of_birth				INTEGER	  	NULL,
+  day_of_birth					INTEGER	  	NULL,
+  birth_TIMESTAMP				TIMESTAMP	NULL,
+  death_TIMESTAMP				TIMESTAMP	NULL,
+  race_concept_id				INTEGER		NOT NULL,
+  ethnicity_concept_id			INTEGER	  	NOT NULL,
+  location_id					BIGINT		NULL,
+  provider_id					BIGINT		NULL,
+  care_site_id					BIGINT		NULL,
+  person_source_value			VARCHAR(50)	NULL,
+  gender_source_value			VARCHAR(50) NULL,
+  gender_source_concept_id	  	INTEGER		NOT NULL,
+  race_source_value				VARCHAR(50) NULL,
+  race_source_concept_id		INTEGER		NOT NULL,
+  ethnicity_source_value		VARCHAR(50) NULL,
+  ethnicity_source_concept_id	INTEGER		NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.observation_period
+(
+  observation_period_id				BIGINT		NOT NULL ,
+  person_id							BIGINT		NOT NULL ,
+  observation_period_start_date		DATE		NOT NULL ,
+  observation_period_end_date		DATE		NOT NULL ,
+  period_type_concept_id			INTEGER		NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.specimen
+(
+  specimen_id					BIGINT			NOT NULL ,
+  person_id						BIGINT			NOT NULL ,
+  specimen_concept_id			INTEGER			NOT NULL ,
+  specimen_type_concept_id		INTEGER			NOT NULL ,
+  specimen_date					DATE			NULL ,
+  specimen_TIMESTAMP				TIMESTAMP		NOT NULL ,
+  quantity						NUMERIC			NULL ,
+  unit_concept_id				INTEGER			NULL ,
+  anatomic_site_concept_id		INTEGER			NOT NULL ,
+  disease_status_concept_id		INTEGER			NOT NULL ,
+  specimen_source_id			VARCHAR(50)		NULL ,
+  specimen_source_value			VARCHAR(50)		NULL ,
+  unit_source_value				VARCHAR(50)		NULL ,
+  anatomic_site_source_value	VARCHAR(50)		NULL ,
+  disease_status_source_value	VARCHAR(50)		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.visit_occurrence
+(
+  visit_occurrence_id			BIGINT			NOT NULL ,
+  person_id						BIGINT			NOT NULL ,
+  visit_concept_id				INTEGER			NOT NULL ,
+  visit_start_date				DATE			NULL ,
+  visit_start_TIMESTAMP			TIMESTAMP		NOT NULL ,
+  visit_end_date				DATE			NULL ,
+  visit_end_TIMESTAMP			TIMESTAMP		NOT NULL ,
+  visit_type_concept_id			INTEGER			NOT NULL ,
+  provider_id					BIGINT			NULL,
+  care_site_id					BIGINT			NULL,
+  visit_source_value			VARCHAR(50)		NULL,
+  visit_source_concept_id		INTEGER			NOT NULL ,
+  admitted_from_concept_id      INTEGER     	NOT NULL ,   
+  admitted_from_source_value    VARCHAR(50) 	NULL ,
+  discharge_to_source_value		VARCHAR(50)		NULL ,
+  discharge_to_concept_id		INTEGER   		NOT NULL ,
+  preceding_visit_occurrence_id	BIGINT 			NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.visit_detail
+(
+  visit_detail_id                    BIGINT      NOT NULL ,
+  person_id                          BIGINT      NOT NULL ,
+  visit_detail_concept_id            INTEGER     NOT NULL ,
+  visit_detail_start_date            DATE        NULL ,
+  visit_detail_start_TIMESTAMP        TIMESTAMP   NOT NULL ,
+  visit_detail_end_date              DATE        NULL ,
+  visit_detail_end_TIMESTAMP          TIMESTAMP   NOT NULL ,
+  visit_detail_type_concept_id       INTEGER     NOT NULL ,
+  provider_id                        BIGINT      NULL ,
+  care_site_id                       BIGINT      NULL ,
+  discharge_to_concept_id            INTEGER     NOT NULL ,
+  admitted_from_concept_id           INTEGER     NOT NULL , 
+  admitted_from_source_value         VARCHAR(50) NULL ,
+  visit_detail_source_value          VARCHAR(50) NULL ,
+  visit_detail_source_concept_id     INTEGER     NOT NULL ,
+  discharge_to_source_value          VARCHAR(50) NULL ,
+  preceding_visit_detail_id          BIGINT      NULL ,
+  visit_detail_parent_id             BIGINT      NULL ,
+  visit_occurrence_id                BIGINT      NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.procedure_occurrence
+(
+  procedure_occurrence_id		BIGINT			NOT NULL ,
+  person_id						BIGINT			NOT NULL ,
+  procedure_concept_id			INTEGER			NOT NULL ,
+  procedure_date				DATE			NULL ,
+  procedure_TIMESTAMP			TIMESTAMP		NOT NULL ,
+  procedure_type_concept_id		INTEGER			NOT NULL ,
+  modifier_concept_id			INTEGER			NOT NULL ,
+  quantity						INTEGER			NULL ,
+  provider_id					BIGINT			NULL ,
+  visit_occurrence_id			BIGINT			NULL ,
+  visit_detail_id             	BIGINT      	NULL ,
+  procedure_source_value		VARCHAR(50)		NULL ,
+  procedure_source_concept_id	INTEGER			NOT NULL ,
+  modifier_source_value		    VARCHAR(50)		NULL 
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.drug_exposure
+(
+  drug_exposure_id				BIGINT			 	NOT NULL ,
+  person_id						BIGINT			 	NOT NULL ,
+  drug_concept_id				INTEGER			  	NOT NULL ,
+  drug_exposure_start_date		DATE			    NULL ,
+  drug_exposure_start_TIMESTAMP	TIMESTAMP		 	NOT NULL ,
+  drug_exposure_end_date		DATE			    NULL ,
+  drug_exposure_end_TIMESTAMP	TIMESTAMP		  	NOT NULL ,
+  verbatim_end_date				DATE			    NULL ,
+  drug_type_concept_id			INTEGER			  	NOT NULL ,
+  stop_reason					VARCHAR(20)			NULL ,
+  refills						INTEGER		  		NULL ,
+  quantity						NUMERIC			    NULL ,
+  days_supply					INTEGER		  		NULL ,
+  sig							TEXT				NULL ,
+  route_concept_id				INTEGER				NOT NULL ,
+  lot_number					VARCHAR(50)	 		NULL ,
+  provider_id					BIGINT			  	NULL ,
+  visit_occurrence_id			BIGINT			  	NULL ,
+  visit_detail_id               BIGINT       		NULL ,
+  drug_source_value				VARCHAR(50)	  		NULL ,
+  drug_source_concept_id		INTEGER			  	NOT NULL ,
+  route_source_value			VARCHAR(50)	  		NULL ,
+  dose_unit_source_value		VARCHAR(50)	  		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.device_exposure
+(
+  device_exposure_id			    BIGINT		  	NOT NULL ,
+  person_id						    BIGINT			NOT NULL ,
+  device_concept_id			        INTEGER			NOT NULL ,
+  device_exposure_start_date	    DATE			NULL ,
+  device_exposure_start_TIMESTAMP	TIMESTAMP		NOT NULL ,
+  device_exposure_end_date		    DATE			NULL ,
+  device_exposure_end_TIMESTAMP    	TIMESTAMP		NULL ,
+  device_type_concept_id		    INTEGER			NOT NULL ,
+  unique_device_id			        VARCHAR(50)		NULL ,
+  quantity						    INTEGER			NULL ,
+  provider_id					    BIGINT			NULL ,
+  visit_occurrence_id			    BIGINT			NULL ,
+  visit_detail_id                 	BIGINT       	NULL ,
+  device_source_value			    VARCHAR(100)	NULL ,
+  device_source_concept_id		    INTEGER			NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.condition_occurrence
+(
+  condition_occurrence_id		BIGINT			NOT NULL ,
+  person_id						BIGINT			NOT NULL ,
+  condition_concept_id			INTEGER			NOT NULL ,
+  condition_start_date			DATE			NULL ,
+  condition_start_TIMESTAMP		TIMESTAMP		NOT NULL ,
+  condition_end_date			DATE			NULL ,
+  condition_end_TIMESTAMP		TIMESTAMP		NULL ,
+  condition_type_concept_id		INTEGER			NOT NULL ,
+  condition_status_concept_id	INTEGER			NOT NULL ,
+  stop_reason					VARCHAR(20)		NULL ,
+  provider_id					BIGINT			NULL ,
+  visit_occurrence_id			BIGINT			NULL ,
+  visit_detail_id               BIGINT	     	NULL ,
+  condition_source_value		VARCHAR(50)		NULL ,
+  condition_source_concept_id	INTEGER			NOT NULL ,
+  condition_status_source_value	VARCHAR(50)		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.measurement
+(
+  measurement_id				BIGINT			NOT NULL ,
+  person_id						BIGINT			NOT NULL ,
+  measurement_concept_id		INTEGER			NOT NULL ,
+  measurement_date				DATE			NULL ,
+  measurement_TIMESTAMP			TIMESTAMP		NOT NULL ,
+  measurement_time              VARCHAR(10) 	NULL,
+  measurement_type_concept_id	INTEGER			NOT NULL ,
+  operator_concept_id			INTEGER			NULL ,
+  value_as_number				NUMERIC			NULL ,
+  value_as_concept_id			INTEGER			NULL ,
+  unit_concept_id				INTEGER			NULL ,
+  range_low					    NUMERIC			NULL ,
+  range_high					NUMERIC			NULL ,
+  provider_id					BIGINT			NULL ,
+  visit_occurrence_id			BIGINT			NULL ,
+  visit_detail_id               BIGINT	     	NULL ,
+  measurement_source_value		VARCHAR(50)		NULL ,
+  measurement_source_concept_id	INTEGER			NOT NULL ,
+  unit_source_value				VARCHAR(50)		NULL ,
+  value_source_value			VARCHAR(50)		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.note
+(
+  note_id						BIGINT			NOT NULL ,
+  person_id						BIGINT			NOT NULL ,
+  note_event_id         		BIGINT      	NULL , 
+  note_event_field_concept_id	INTEGER 		NOT NULL , 
+  note_date						DATE			NULL ,
+  note_TIMESTAMP					TIMESTAMP		NOT NULL ,
+  note_type_concept_id			INTEGER			NOT NULL ,
+  note_class_concept_id 		INTEGER			NOT NULL ,
+  note_title					VARCHAR(250)	NULL ,
+  note_text						TEXT  			NULL ,
+  encoding_concept_id			INTEGER			NOT NULL ,
+  language_concept_id			INTEGER			NOT NULL ,
+  provider_id					BIGINT			NULL ,
+  visit_occurrence_id			BIGINT			NULL ,
+  visit_detail_id       		BIGINT       	NULL ,
+  note_source_value				VARCHAR(50)		NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.note_nlp
+(
+  note_nlp_id					BIGINT			NOT NULL ,
+  note_id						BIGINT			NOT NULL ,
+  section_concept_id			INTEGER			NOT NULL ,
+  snippet						VARCHAR(250)	NULL ,
+  "offset"					    VARCHAR(250)	NULL ,
+  lexical_variant				VARCHAR(250)	NOT NULL ,
+  note_nlp_concept_id			INTEGER			NOT NULL ,
+  nlp_system					VARCHAR(250)	NULL ,
+  nlp_date						DATE			NOT NULL ,
+  nlp_TIMESTAMP					TIMESTAMP		NULL ,
+  term_exists					VARCHAR(1)		NULL ,
+  term_temporal					VARCHAR(50)		NULL ,
+  term_modifiers				VARCHAR(2000)	NULL ,
+  note_nlp_source_concept_id  	INTEGER			NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.observation
+(
+  observation_id					BIGINT			NOT NULL ,
+  person_id						    BIGINT			NOT NULL ,
+  observation_concept_id			INTEGER			NOT NULL ,
+  observation_date				    DATE			NULL ,
+  observation_TIMESTAMP				TIMESTAMP		NOT NULL ,
+  observation_type_concept_id	    INTEGER			NOT NULL ,
+  value_as_number				    NUMERIC			NULL ,
+  value_as_string				    VARCHAR(60)		NULL ,
+  value_as_concept_id			    INTEGER			NULL ,
+  qualifier_concept_id			    INTEGER			NULL ,
+  unit_concept_id				    INTEGER			NULL ,
+  provider_id					    BIGINT			NULL ,
+  visit_occurrence_id			    BIGINT			NULL ,
+  visit_detail_id               	BIGINT      	NULL ,
+  observation_source_value		  	VARCHAR(50)		NULL ,
+  observation_source_concept_id		INTEGER			NOT NULL ,
+  unit_source_value				    VARCHAR(50)		NULL ,
+  qualifier_source_value			VARCHAR(50)		NULL ,
+  observation_event_id				BIGINT			NULL , 
+  obs_event_field_concept_id		INTEGER			NOT NULL , 
+  value_as_TIMESTAMP					TIMESTAMP		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.survey_conduct 
+(
+  survey_conduct_id					BIGINT			NOT NULL ,
+  person_id						    BIGINT			NOT NULL ,
+  survey_concept_id			  		INTEGER			NOT NULL ,
+  survey_start_date				    DATE			NULL ,
+  survey_start_TIMESTAMP				TIMESTAMP		NULL ,
+  survey_end_date					DATE			NULL ,
+  survey_end_TIMESTAMP				TIMESTAMP		NOT NULL ,
+  provider_id						BIGINT			NULL ,
+  assisted_concept_id	  			INTEGER			NOT NULL ,
+  respondent_type_concept_id		INTEGER			NOT NULL ,
+  timing_concept_id					INTEGER			NOT NULL ,
+  collection_method_concept_id		INTEGER			NOT NULL ,
+  assisted_source_value		  		VARCHAR(50)		NULL ,
+  respondent_type_source_value		VARCHAR(100)  	NULL ,
+  timing_source_value				VARCHAR(100)	NULL ,
+  collection_method_source_value	VARCHAR(100)	NULL ,
+  survey_source_value				VARCHAR(100)	NULL ,
+  survey_source_concept_id			INTEGER			NOT NULL ,
+  survey_source_identifier			VARCHAR(100)	NULL ,
+  validated_survey_concept_id		INTEGER			NOT NULL ,
+  validated_survey_source_value		VARCHAR(100)	NULL ,
+  survey_version_number				VARCHAR(20)		NULL ,
+  visit_occurrence_id				BIGINT			NULL ,
+  visit_detail_id					BIGINT			NULL ,
+  response_visit_occurrence_id	BIGINT			NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.fact_relationship
+(
+  domain_concept_id_1		INTEGER			NOT NULL ,
+  fact_id_1					BIGINT			NOT NULL ,
+  domain_concept_id_2		INTEGER			NOT NULL ,
+  fact_id_2					BIGINT			NOT NULL ,
+  relationship_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+
+-- ************************
+-- Standardized health system data
+-- ************************
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.location
+(
+  location_id			BIGINT			NOT NULL ,
+  address_1				VARCHAR(50)		NULL ,
+  address_2				VARCHAR(50)		NULL ,
+  city					VARCHAR(50)		NULL ,
+  state					VARCHAR(2)		NULL ,
+  zip					VARCHAR(9)		NULL ,
+  county				VARCHAR(20)		NULL ,
+  country				VARCHAR(100)	NULL ,
+  location_source_value VARCHAR(50)		NULL ,
+  latitude				NUMERIC			NULL ,
+  longitude				NUMERIC			NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.location_history
+(
+  location_history_id           BIGINT      NOT NULL ,
+  location_id			        BIGINT		NOT NULL ,
+  relationship_type_concept_id	INTEGER		NOT NULL , 
+  domain_id				        VARCHAR(50)	NOT NULL ,
+  entity_id				        BIGINT		NOT NULL ,
+  start_date			        DATE		NOT NULL ,
+  end_date				        DATE		NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.care_site
+(
+  care_site_id					BIGINT			NOT NULL ,
+  care_site_name				VARCHAR(255)	NULL ,
+  place_of_service_concept_id	INTEGER			NOT NULL ,
+  location_id					BIGINT			NULL ,
+  care_site_source_value		VARCHAR(50)		NULL ,
+  place_of_service_source_value	VARCHAR(50)		NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.provider
+(
+  provider_id					BIGINT			NOT NULL ,
+  provider_name					VARCHAR(255)	NULL ,
+  NPI							VARCHAR(20)		NULL ,
+  DEA							VARCHAR(20)		NULL ,
+  specialty_concept_id			INTEGER			NOT NULL ,
+  care_site_id					BIGINT			NULL ,
+  year_of_birth					INTEGER			NULL ,
+  gender_concept_id				INTEGER			NOT NULL ,
+  provider_source_value			VARCHAR(50)		NULL ,
+  specialty_source_value		VARCHAR(50)		NULL ,
+  specialty_source_concept_id	INTEGER			NULL ,
+  gender_source_value			VARCHAR(50)		NULL ,
+  gender_source_concept_id		INTEGER			NOT NULL
+)
+;
+
+
+-- ************************
+-- Standardized health economics
+-- ************************
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.payer_plan_period
+(
+  payer_plan_period_id			BIGINT			NOT NULL ,
+  person_id						BIGINT			NOT NULL ,
+  contract_person_id            BIGINT        	NULL ,
+  payer_plan_period_start_date  DATE			NOT NULL ,
+  payer_plan_period_end_date	DATE			NOT NULL ,
+  payer_concept_id              INTEGER       	NOT NULL ,
+  plan_concept_id               INTEGER       	NOT NULL ,
+  contract_concept_id           INTEGER       	NOT NULL ,
+  sponsor_concept_id            INTEGER       	NOT NULL ,
+  stop_reason_concept_id        INTEGER       	NOT NULL ,
+  payer_source_value			VARCHAR(50)	  	NULL ,
+  payer_source_concept_id       INTEGER       	NOT NULL ,
+  plan_source_value				VARCHAR(50)	  	NULL ,
+  plan_source_concept_id        INTEGER       	NOT NULL ,
+  contract_source_value         VARCHAR(50)   	NULL ,
+  contract_source_concept_id    INTEGER       	NOT NULL ,
+  sponsor_source_value          VARCHAR(50)   	NULL ,
+  sponsor_source_concept_id     INTEGER       	NOT NULL ,
+  family_source_value			VARCHAR(50)	  	NULL ,
+  stop_reason_source_value      VARCHAR(50)   	NULL ,
+  stop_reason_source_concept_id INTEGER       	NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.cost
+(
+  cost_id						BIGINT		NOT NULL ,
+  person_id						BIGINT		NOT NULL,
+  cost_event_id					BIGINT      NOT NULL ,
+  cost_event_field_concept_id	INTEGER		NOT NULL , 
+  cost_concept_id				INTEGER		NOT NULL ,
+  cost_type_concept_id		  	INTEGER     NOT NULL ,
+  currency_concept_id			INTEGER		NOT NULL ,
+  cost							NUMERIC		NULL ,
+  incurred_date					DATE		NOT NULL ,
+  billed_date					DATE		NULL ,
+  paid_date						DATE		NULL ,
+  revenue_code_concept_id		INTEGER		NOT NULL ,
+  drg_concept_id			    INTEGER		NOT NULL ,
+  cost_source_value				VARCHAR(50)	NULL ,
+  cost_source_concept_id	  	INTEGER		NOT NULL ,
+  revenue_code_source_value 	VARCHAR(50) NULL ,
+  drg_source_value			    VARCHAR(3)	NULL ,
+  payer_plan_period_id			BIGINT		NULL
+)
+;
+
+
+-- ************************
+-- Standardized derived elements
+-- ************************
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.drug_era
+(
+  drug_era_id				BIGINT		NOT NULL ,
+  person_id					BIGINT		NOT NULL ,
+  drug_concept_id			INTEGER		NOT NULL ,
+  drug_era_start_TIMESTAMP	TIMESTAMP		NOT NULL ,
+  drug_era_end_TIMESTAMP		TIMESTAMP		NOT NULL ,
+  drug_exposure_count		INTEGER		NULL ,
+  gap_days					INTEGER		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.dose_era
+(
+  dose_era_id				BIGINT			NOT NULL ,
+  person_id					BIGINT			NOT NULL ,
+  drug_concept_id			INTEGER			NOT NULL ,
+  unit_concept_id			INTEGER			NOT NULL ,
+  dose_value				NUMERIC			NOT NULL ,
+  dose_era_start_TIMESTAMP	TIMESTAMP		NOT NULL ,
+  dose_era_end_TIMESTAMP		TIMESTAMP		NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.condition_era
+(
+  condition_era_id					BIGINT			NOT NULL ,
+  person_id							BIGINT			NOT NULL ,
+  condition_concept_id				INTEGER			NOT NULL ,
+  condition_era_start_TIMESTAMP		TIMESTAMP		NOT NULL ,
+  condition_era_end_TIMESTAMP		TIMESTAMP		NOT NULL ,
+  condition_occurrence_count		INTEGER			NULL
+)
+;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>survey_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>64</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL - ${cdm_schema}.omop 6.0 Result Tables</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- *********************************************************************************
+-- Copyright 2018-08 Observational Health Data Sciences and Informatics
+--
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--     http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+--********************************************************************************/
+
+
+
+-- ####### #     # ####### ######      #####  ######  #     #            #####        ###
+-- #     # ##   ## #     # #     #    #     # #     # ##   ##    #    # #     #      #   #
+-- #     # # # # # #     # #     #    #       #     # # # # #    #    # #           #     #
+-- #     # #  #  # #     # ######     #       #     # #  #  #    #    # ######      #     #
+-- #     # #     # #     # #          #       #     # #     #    #    # #     # ### #     #
+-- #     # #     # #     # #          #     # #     # #     #     #  #  #     # ###  #   #
+-- ####### #     # ####### #           #####  ######  #     #      ##    #####  ###   ###
+
+-- postgresql script to create OMOP common data model results schema version 6.0
+
+-- last revised: 27-Aug-2018
+
+-- Authors:  Patrick Ryan, Christian Reich, Clair Blacketer
+
+-- Updated by: Tathagata Bhattacharjee to adapt to Pentaho Data Integration Tool
+
+
+-- *************************/
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.cohort
+(
+  cohort_definition_id	BIGINT		NOT NULL ,
+  subject_id			BIGINT		NOT NULL ,
+  cohort_start_date		DATE		NOT NULL ,
+  cohort_end_date		DATE		NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS ${cdm_schema}.cohort_definition (
+  cohort_definition_id				INTEGER			NOT NULL,
+  cohort_definition_name			VARCHAR(255)	NOT NULL,
+  cohort_definition_description		TEXT			NULL,
+  definition_type_concept_id		INTEGER			NOT NULL,
+  cohort_definition_syntax			TEXT			NULL,
+  subject_concept_id				INTEGER			NOT NULL,
+  cohort_initiation_date			DATE			NULL
+)
+;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>survey_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1200</xloc>
+      <yloc>64</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL - Drop PKs IF EXISTS</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- Drop Primary Keys IF EXISTS to speed up the data insert process in ETL
+
+ALTER TABLE ${cdm_schema}.person DROP CONSTRAINT IF EXISTS xpk_person CASCADE;
+ALTER TABLE ${cdm_schema}.observation_period DROP CONSTRAINT IF EXISTS xpk_observation_period CASCADE;
+ALTER TABLE ${cdm_schema}.visit_occurrence DROP CONSTRAINT IF EXISTS xpk_visit_occurrence CASCADE;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS xpk_visit_detail CASCADE;
+ALTER TABLE ${cdm_schema}.condition_occurrence DROP CONSTRAINT IF EXISTS xpk_condition_occurrence CASCADE;
+ALTER TABLE ${cdm_schema}.drug_exposure DROP CONSTRAINT IF EXISTS xpk_drug_exposure CASCADE;
+ALTER TABLE ${cdm_schema}.procedure_occurrence DROP CONSTRAINT IF EXISTS xpk_procedure_occurrence CASCADE;
+ALTER TABLE ${cdm_schema}.device_exposure DROP CONSTRAINT IF EXISTS xpk_device_exposure CASCADE;
+ALTER TABLE ${cdm_schema}.measurement DROP CONSTRAINT IF EXISTS xpk_measurement CASCADE;
+ALTER TABLE ${cdm_schema}.observation DROP CONSTRAINT IF EXISTS xpk_observation CASCADE;
+ALTER TABLE ${cdm_schema}.note DROP CONSTRAINT IF EXISTS xpk_note CASCADE;
+ALTER TABLE ${cdm_schema}.note_nlp DROP CONSTRAINT IF EXISTS xpk_note_nlp CASCADE;
+ALTER TABLE ${cdm_schema}.specimen DROP CONSTRAINT IF EXISTS xpk_specimen CASCADE;
+ALTER TABLE ${cdm_schema}.location DROP CONSTRAINT IF EXISTS xpk_location CASCADE;
+ALTER TABLE ${cdm_schema}.care_site DROP CONSTRAINT IF EXISTS xpk_care_site CASCADE;
+ALTER TABLE ${cdm_schema}.provider DROP CONSTRAINT IF EXISTS xpk_provider CASCADE;
+ALTER TABLE ${cdm_schema}.payer_plan_period DROP CONSTRAINT IF EXISTS xpk_payer_plan_period CASCADE;
+ALTER TABLE ${cdm_schema}.drug_era DROP CONSTRAINT IF EXISTS xpk_drug_era CASCADE;
+ALTER TABLE ${cdm_schema}.dose_era DROP CONSTRAINT IF EXISTS xpk_dose_era CASCADE;
+ALTER TABLE ${cdm_schema}.condition_era DROP CONSTRAINT IF EXISTS xpk_condition_era CASCADE;
+ALTER TABLE ${cdm_schema}.concept DROP CONSTRAINT IF EXISTS xpk_concept CASCADE;
+ALTER TABLE ${cdm_schema}.vocabulary DROP CONSTRAINT IF EXISTS xpk_vocabulary CASCADE;
+ALTER TABLE ${cdm_schema}.domain DROP CONSTRAINT IF EXISTS xpk_domain CASCADE;
+ALTER TABLE ${cdm_schema}.concept_class DROP CONSTRAINT IF EXISTS xpk_concept_class CASCADE;
+ALTER TABLE ${cdm_schema}.relationship DROP CONSTRAINT IF EXISTS xpk_relationship CASCADE;
+ALTER TABLE ${cdm_schema}.concept DROP CONSTRAINT IF EXISTS xpk_concept CASCADE;
+ALTER TABLE ${cdm_schema}.vocabulary DROP CONSTRAINT IF EXISTS xpk_vocabulary CASCADE;
+ALTER TABLE ${cdm_schema}.domain DROP CONSTRAINT IF EXISTS xpk_domain CASCADE;
+ALTER TABLE ${cdm_schema}.concept_class DROP CONSTRAINT IF EXISTS xpk_concept_class CASCADE;
+ALTER TABLE ${cdm_schema}.concept_relationship DROP CONSTRAINT IF EXISTS xpk_concept_relationship CASCADE;
+ALTER TABLE ${cdm_schema}.concept_relationship DROP CONSTRAINT IF EXISTS xpk_concept_relationship CASCADE;
+ALTER TABLE ${cdm_schema}.concept_relationship DROP CONSTRAINT IF EXISTS xpk_concept_relationship CASCADE;
+ALTER TABLE ${cdm_schema}.relationship DROP CONSTRAINT IF EXISTS xpk_relationship CASCADE;
+ALTER TABLE ${cdm_schema}.concept_ancestor DROP CONSTRAINT IF EXISTS xpk_concept_ancestor CASCADE;
+ALTER TABLE ${cdm_schema}.concept_ancestor DROP CONSTRAINT IF EXISTS xpk_concept_ancestor CASCADE;
+ALTER TABLE ${cdm_schema}.source_to_concept_map DROP CONSTRAINT IF EXISTS xpk_source_to_concept_map CASCADE;
+ALTER TABLE ${cdm_schema}.source_to_concept_map DROP CONSTRAINT IF EXISTS xpk_source_to_concept_map CASCADE;
+ALTER TABLE ${cdm_schema}.source_to_concept_map DROP CONSTRAINT IF EXISTS xpk_source_to_concept_map CASCADE;
+ALTER TABLE ${cdm_schema}.source_to_concept_map DROP CONSTRAINT IF EXISTS xpk_source_to_concept_map CASCADE;
+ALTER TABLE ${cdm_schema}.drug_strength DROP CONSTRAINT IF EXISTS xpk_drug_strength CASCADE;
+ALTER TABLE ${cdm_schema}.drug_strength DROP CONSTRAINT IF EXISTS xpk_drug_strength CASCADE;
+ALTER TABLE ${cdm_schema}.person DROP CONSTRAINT IF EXISTS xpk_person CASCADE;
+ALTER TABLE ${cdm_schema}.observation_period DROP CONSTRAINT IF EXISTS xpk_observation_period CASCADE;
+ALTER TABLE ${cdm_schema}.specimen DROP CONSTRAINT IF EXISTS xpk_specimen CASCADE;
+ALTER TABLE ${cdm_schema}.visit_occurrence DROP CONSTRAINT IF EXISTS xpk_visit_occurrence CASCADE;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS xpk_visit_detail CASCADE;
+ALTER TABLE ${cdm_schema}.procedure_occurrence DROP CONSTRAINT IF EXISTS xpk_procedure_occurrence CASCADE;
+ALTER TABLE ${cdm_schema}.drug_exposure DROP CONSTRAINT IF EXISTS xpk_drug_exposure CASCADE;
+ALTER TABLE ${cdm_schema}.device_exposure DROP CONSTRAINT IF EXISTS xpk_device_exposure CASCADE;
+ALTER TABLE ${cdm_schema}.condition_occurrence DROP CONSTRAINT IF EXISTS xpk_condition_occurrence CASCADE;
+ALTER TABLE ${cdm_schema}.measurement DROP CONSTRAINT IF EXISTS xpk_measurement CASCADE;
+ALTER TABLE ${cdm_schema}.note DROP CONSTRAINT IF EXISTS xpk_note CASCADE;
+ALTER TABLE ${cdm_schema}.note_nlp DROP CONSTRAINT IF EXISTS xpk_note_nlp CASCADE;
+ALTER TABLE ${cdm_schema}.observation DROP CONSTRAINT IF EXISTS xpk_observation CASCADE;
+ALTER TABLE ${cdm_schema}.survey_conduct DROP CONSTRAINT IF EXISTS xpk_survey CASCADE;
+ALTER TABLE ${cdm_schema}.location DROP CONSTRAINT IF EXISTS xpk_location CASCADE;
+ALTER TABLE ${cdm_schema}.location_history DROP CONSTRAINT IF EXISTS xpk_location_history CASCADE;
+ALTER TABLE ${cdm_schema}.care_site DROP CONSTRAINT IF EXISTS xpk_care_site CASCADE;
+ALTER TABLE ${cdm_schema}.provider DROP CONSTRAINT IF EXISTS xpk_provider CASCADE;
+ALTER TABLE ${cdm_schema}.payer_plan_period DROP CONSTRAINT IF EXISTS xpk_payer_plan_period CASCADE;
+ALTER TABLE ${cdm_schema}.cost DROP CONSTRAINT IF EXISTS xpk_visit_cost CASCADE;
+ALTER TABLE ${cdm_schema}.drug_era DROP CONSTRAINT IF EXISTS xpk_drug_era CASCADE;
+ALTER TABLE ${cdm_schema}.dose_era DROP CONSTRAINT IF EXISTS xpk_dose_era CASCADE;
+ALTER TABLE ${cdm_schema}.condition_era DROP CONSTRAINT IF EXISTS xpk_condition_era CASCADE;
+ALTER TABLE ${cdm_schema}.cohort DROP CONSTRAINT IF EXISTS xpk_cohort CASCADE;
+ALTER TABLE ${cdm_schema}.cohort DROP CONSTRAINT IF EXISTS xpk_cohort CASCADE;
+ALTER TABLE ${cdm_schema}.cohort DROP CONSTRAINT IF EXISTS xpk_cohort CASCADE;
+ALTER TABLE ${cdm_schema}.cohort DROP CONSTRAINT IF EXISTS xpk_cohort CASCADE;
+ALTER TABLE ${cdm_schema}.cohort_definition DROP CONSTRAINT IF EXISTS xpk_cohort_definition CASCADE;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>survey_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1200</xloc>
+      <yloc>224</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL - Drop FKs IF EXISTS</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- Drop Foreign Keys IF EXISTS to speed up the data insert process in ETL
+
+ALTER TABLE ${cdm_schema}.person DROP CONSTRAINT IF EXISTS fpk_person_location;
+ALTER TABLE ${cdm_schema}.person DROP CONSTRAINT IF EXISTS fpk_person_provider;
+ALTER TABLE ${cdm_schema}.person DROP CONSTRAINT IF EXISTS fpk_person_care_site;
+ALTER TABLE ${cdm_schema}.observation_period DROP CONSTRAINT IF EXISTS fpk_observation_period_person;
+ALTER TABLE ${cdm_schema}.specimen DROP CONSTRAINT IF EXISTS fpk_specimen_person;
+ALTER TABLE ${cdm_schema}.visit_occurrence DROP CONSTRAINT IF EXISTS fpk_visit_person;
+ALTER TABLE ${cdm_schema}.visit_occurrence DROP CONSTRAINT IF EXISTS fpk_visit_provider;
+ALTER TABLE ${cdm_schema}.visit_occurrence DROP CONSTRAINT IF EXISTS fpk_visit_care_site;
+ALTER TABLE ${cdm_schema}.visit_occurrence DROP CONSTRAINT IF EXISTS fpk_visit_preceding;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS fpk_v_detail_person;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS fpk_v_detail_provider;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS fpk_v_detail_care_site;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS fpk_v_detail_preceding;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS fpk_v_detail_parent;
+ALTER TABLE ${cdm_schema}.visit_detail DROP CONSTRAINT IF EXISTS fpd_v_detail_visit;
+ALTER TABLE ${cdm_schema}.procedure_occurrence DROP CONSTRAINT IF EXISTS fpk_procedure_person;
+ALTER TABLE ${cdm_schema}.procedure_occurrence DROP CONSTRAINT IF EXISTS fpk_procedure_provider;
+ALTER TABLE ${cdm_schema}.procedure_occurrence DROP CONSTRAINT IF EXISTS fpk_procedure_visit;
+ALTER TABLE ${cdm_schema}.procedure_occurrence DROP CONSTRAINT IF EXISTS fpk_procedure_v_detail;
+ALTER TABLE ${cdm_schema}.drug_exposure DROP CONSTRAINT IF EXISTS fpk_drug_person;
+ALTER TABLE ${cdm_schema}.drug_exposure DROP CONSTRAINT IF EXISTS fpk_drug_provider;
+ALTER TABLE ${cdm_schema}.drug_exposure DROP CONSTRAINT IF EXISTS fpk_drug_visit;
+ALTER TABLE ${cdm_schema}.drug_exposure DROP CONSTRAINT IF EXISTS fpk_drug_v_detail;
+ALTER TABLE ${cdm_schema}.device_exposure DROP CONSTRAINT IF EXISTS fpk_device_person;
+ALTER TABLE ${cdm_schema}.device_exposure DROP CONSTRAINT IF EXISTS fpk_device_provider;
+ALTER TABLE ${cdm_schema}.device_exposure DROP CONSTRAINT IF EXISTS fpk_device_visit;
+ALTER TABLE ${cdm_schema}.device_exposure DROP CONSTRAINT IF EXISTS fpk_device_v_detail;
+ALTER TABLE ${cdm_schema}.condition_occurrence DROP CONSTRAINT IF EXISTS fpk_condition_person;
+ALTER TABLE ${cdm_schema}.condition_occurrence DROP CONSTRAINT IF EXISTS fpk_condition_provider;
+ALTER TABLE ${cdm_schema}.condition_occurrence DROP CONSTRAINT IF EXISTS fpk_condition_visit;
+ALTER TABLE ${cdm_schema}.condition_occurrence DROP CONSTRAINT IF EXISTS fpk_condition_v_detail;
+ALTER TABLE ${cdm_schema}.measurement DROP CONSTRAINT IF EXISTS fpk_measurement_person;
+ALTER TABLE ${cdm_schema}.measurement DROP CONSTRAINT IF EXISTS fpk_measurement_provider;
+ALTER TABLE ${cdm_schema}.measurement DROP CONSTRAINT IF EXISTS fpk_measurement_visit;
+ALTER TABLE ${cdm_schema}.measurement DROP CONSTRAINT IF EXISTS fpk_measurement_v_detail;
+ALTER TABLE ${cdm_schema}.note DROP CONSTRAINT IF EXISTS fpk_note_person;
+ALTER TABLE ${cdm_schema}.note DROP CONSTRAINT IF EXISTS fpk_note_provider;
+ALTER TABLE ${cdm_schema}.note DROP CONSTRAINT IF EXISTS fpk_note_visit;
+ALTER TABLE ${cdm_schema}.note DROP CONSTRAINT IF EXISTS fpk_note_v_detail;
+ALTER TABLE ${cdm_schema}.note_nlp DROP CONSTRAINT IF EXISTS fpk_note_nlp_note;
+ALTER TABLE ${cdm_schema}.observation DROP CONSTRAINT IF EXISTS fpk_observation_person;
+ALTER TABLE ${cdm_schema}.observation DROP CONSTRAINT IF EXISTS fpk_observation_provider;
+ALTER TABLE ${cdm_schema}.observation DROP CONSTRAINT IF EXISTS fpk_observation_visit;
+ALTER TABLE ${cdm_schema}.observation DROP CONSTRAINT IF EXISTS fpk_observation_v_detail;
+ALTER TABLE ${cdm_schema}.survey_conduct DROP CONSTRAINT IF EXISTS fpk_survey_person;
+ALTER TABLE ${cdm_schema}.survey_conduct DROP CONSTRAINT IF EXISTS fpk_survey_provider;
+ALTER TABLE ${cdm_schema}.survey_conduct DROP CONSTRAINT IF EXISTS fpk_survey_visit;
+ALTER TABLE ${cdm_schema}.survey_conduct DROP CONSTRAINT IF EXISTS fpk_survey_v_detail;
+ALTER TABLE ${cdm_schema}.survey_conduct DROP CONSTRAINT IF EXISTS fpk_response_visit;
+ALTER TABLE ${cdm_schema}.location_history DROP CONSTRAINT IF EXISTS fpk_location_history;
+ALTER TABLE ${cdm_schema}.care_site DROP CONSTRAINT IF EXISTS fpk_care_site_location;
+ALTER TABLE ${cdm_schema}.provider DROP CONSTRAINT IF EXISTS fpk_provider_care_site;
+ALTER TABLE ${cdm_schema}.payer_plan_period DROP CONSTRAINT IF EXISTS fpk_payer_plan_period;
+ALTER TABLE ${cdm_schema}.payer_plan_period DROP CONSTRAINT IF EXISTS fpk_contract_person;
+ALTER TABLE ${cdm_schema}.cost DROP CONSTRAINT IF EXISTS fpk_cost_person;
+ALTER TABLE ${cdm_schema}.cost DROP CONSTRAINT IF EXISTS fpk_cost_period;
+ALTER TABLE ${cdm_schema}.drug_era DROP CONSTRAINT IF EXISTS fpk_drug_era_person;
+ALTER TABLE ${cdm_schema}.dose_era DROP CONSTRAINT IF EXISTS fpk_dose_era_person;
+ALTER TABLE ${cdm_schema}.condition_era DROP CONSTRAINT IF EXISTS fpk_condition_era_person;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>survey_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>224</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL - Drop Indexes</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- Drop Indexes IF EXISTS to speed up the data insert process in ETL
+
+DROP INDEX IF EXISTS ${cdm_schema}.idx_procedure_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_procedure_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_procedure_visit_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_observation_period_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_specimen_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_specimen_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_visit_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_visit_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_drug_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_drug_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_drug_visit_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_device_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_device_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_device_visit_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_fact_relationship_id_1;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_fact_relationship_id_2;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_fact_relationship_id_3;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_measurement_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_measurement_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_measurement_visit_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_note_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_note_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_note_visit_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_note_nlp_note_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_note_nlp_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_observation_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_observation_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_observation_visit_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_survey_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_period_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_visit_detail_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_visit_detail_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_cost_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_drug_era_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_drug_era_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_dose_era_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_dose_era_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_condition_era_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_condition_era_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_condition_person_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_condition_concept_id;
+DROP INDEX IF EXISTS ${cdm_schema}.idx_condition_visit_id;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>survey_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>384</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <attributes/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1200</xloc>
+      <yloc>384</yloc>
+      <attributes_kjc/>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>Start</from>
+      <to>Set variables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>SQL - Creating sero data DDL</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL - Creating sero data DDL</from>
+      <to>SQL - ${cdm_schema}.omop 6.0 Tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL - ${cdm_schema}.omop 6.0 Tables</from>
+      <to>SQL - ${cdm_schema}.omop 6.0 Result Tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL - ${cdm_schema}.omop 6.0 Result Tables</from>
+      <to>SQL - Drop PKs IF EXISTS</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL - Drop PKs IF EXISTS</from>
+      <to>SQL - Drop FKs IF EXISTS</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL - Drop FKs IF EXISTS</from>
+      <to>SQL - Drop Indexes</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL - Drop Indexes</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+  <attributes/>
+</job>
