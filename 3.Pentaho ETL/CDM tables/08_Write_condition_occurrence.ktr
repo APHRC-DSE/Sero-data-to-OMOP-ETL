@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>05_Write-person</name>
+    <name>08_Write_condition_occurrence</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -426,9 +426,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/04/28 11:43:33.688</created_date>
+    <created_date>2023/05/03 16:15:08.717</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/05/02 13:00:49.111</modified_date>
+    <modified_date>2023/05/05 14:39:06.919</modified_date>
     <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
@@ -487,13 +487,8 @@
   </connection>
   <order>
     <hop>
-      <from>Table - Read staging serodata table</from>
-      <to>Join rows (cartesian product)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table - omop_6_0.person</from>
-      <to>Join rows (cartesian product)</to>
+      <from>Add sequence</from>
+      <to>Calculator</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -502,34 +497,49 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add sequence</from>
-      <to>Calculator</to>
+      <from>Table - Read staging serodata table</from>
+      <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table - omop_6_0.condition_occurrence</from>
+      <to>Join rows (cartesian product)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Calculator</from>
-      <to>Select values 2</to>
+      <to>Merge join - add visit_occurence</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
+      <from>Table - omop_6_0.visit_occurrence</from>
+      <to>Merge join - add visit_occurence</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join - add visit_occurence</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
       <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Sort rows</from>
-      <to>Select values 3</to>
+      <to>Select values - Align data types</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 3</from>
-      <to>Table - write person data </to>
+      <from>Select values - Align data types</from>
+      <to>Table output - write </to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
+    <name>Add sequence</name>
+    <type>Sequence</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -538,433 +548,16 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <name>studyid</name>
-        <rename/>
-      </field>
-      <field>
-        <name>q8_gender</name>
-        <rename/>
-      </field>
-      <field>
-        <name>gender_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>birth_timestamp</name>
-        <rename/>
-      </field>
-      <field>
-        <name>death_timestamp</name>
-        <rename/>
-      </field>
-      <field>
-        <name>race_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ethnicity_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>location_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>provider_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>care_site_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>person_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>gender_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>gender_source_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>race_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>race_source_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ethnicity_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ethnicity_source_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>max_person_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>person_sequence</name>
-        <rename/>
-      </field>
-      <field>
-        <name>person_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>year_of_birth</name>
-        <rename/>
-      </field>
-      <field>
-        <name>month_of_birth</name>
-        <rename/>
-      </field>
-      <field>
-        <name>day_of_birth</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>studyid</name>
-      </remove>
-      <remove>
-        <name>q8_gender</name>
-      </remove>
-      <remove>
-        <name>person_sequence</name>
-      </remove>
-      <meta>
-        <name>person_id</name>
-        <rename>person_id</rename>
-        <type>None</type>
-        <length>150</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>gender_concept_id</name>
-        <rename>gender_concept_id</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>birth_timestamp</name>
-        <rename>birth_timestamp</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>death_timestamp</name>
-        <rename>death_timestamp</rename>
-        <type>None</type>
-        <length>2147483647</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>race_concept_id</name>
-        <rename>race_concept_id</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ethnicity_concept_id</name>
-        <rename>ethnicity_concept_id</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>location_id</name>
-        <rename>location_id</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>provider_id</name>
-        <rename>provider_id</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>care_site_id</name>
-        <rename>care_site_id</rename>
-        <type>None</type>
-        <length>2147483647</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>person_source_value</name>
-        <rename>person_source_value</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>gender_source_value</name>
-        <rename>gender_source_value</rename>
-        <type>None</type>
-        <length>150</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>gender_source_concept_id</name>
-        <rename>gender_source_concept_id</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>race_source_value</name>
-        <rename>race_source_value</rename>
-        <type>None</type>
-        <length>2147483647</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>race_source_concept_id</name>
-        <rename>race_source_concept_id</rename>
-        <type>None</type>
-        <length>9</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ethnicity_source_value</name>
-        <rename>ethnicity_source_value</rename>
-        <type>None</type>
-        <length>2147483647</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ethnicity_source_concept_id</name>
-        <rename>ethnicity_source_concept_id</rename>
-        <type>None</type>
-        <length>2147483647</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>year_of_birth</name>
-        <rename>year_of_birth</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>month_of_birth</name>
-        <rename>month_of_birth</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>day_of_birth</name>
-        <rename>day_of_birth</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
+    <valuename>condition_sequence</valuename>
+    <use_database>N</use_database>
+    <connection/>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -974,14 +567,55 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>288</yloc>
+      <xloc>506</xloc>
+      <yloc>175</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>condition_occurrence_id</field_name>
+      <calc_type>ADD</calc_type>
+      <field_a>max_condition_occurrence_id</field_a>
+      <field_b>condition_sequence</field_b>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>618</xloc>
+      <yloc>319</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join rows (cartesian product)</name>
+    <type>JoinRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -992,21 +626,16 @@
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>person_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+    <cache_size>1000</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue/>
+        <function>=</function>
+        <rightvalue/>
+      </condition>
+    </compare>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1016,8 +645,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>288</yloc>
+      <xloc>330</xloc>
+      <yloc>319</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1033,31 +662,244 @@
       <schema_name/>
     </partitioning>
     <connection>survey_connection</connection>
-    <sql>SELECT studyid, q8_gender, 
-	case 
-		when q8_gender = 'male' then 8507
-		when q8_gender = 'female' then 8532
-	end as gender_concept_id,
-	 --9999 as year_of_birth,
-	 --6 as month_of_birth,
-	--15 as day_of_birth,
-	q7_birth_date as birth_timestamp,
-	'2099-07-15 00:00:00.000' as death_timestamp,
-	38003600 as race_concept_id,
-	4087925 as ethnicity_concept_id,
-	location_id,
-	provider_id,
-	NULL as care_site_id,
-	studyid as person_source_value,
-	q8_gender as gender_source_value,
-	0 as gender_source_concept_id,
-	NULL race_source_value,
-	0 as race_source_concept_id,
-	NULL as ethnicity_source_value,
-	0 as ethnicity_source_concept_id	
+    <sql>-- This script helps to change the wide format data to long format reducing the many number of columns to one column.
 
-	FROM (SELECT * FROM staging.serodata_one order by studyid ASC) as A
+SELECT * FROM 
+(
 
+--q11_fever
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_fever = 'yes' then 437663
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_fever = 'yes' then 'Fever : Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS A
+
+UNION ALL
+--q11_shortness_breath
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_shortness_breath = 'yes' then 4308377
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_shortness_breath = 'yes' then 'Shortness_breath: Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS B
+
+
+UNION ALL
+--q11_cough
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_cough = 'yes' then 254761
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_cough = 'yes' then 'Cough:Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS C
+
+UNION ALL
+--q11_PAIN
+
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_pain = 'yes' then 4329041
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_pain = 'yes' then 'Pain: Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS D
+
+
+UNION ALL
+
+--q11_nause
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_nausea = 'yes' then 31967
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_nausea = 'yes' then 'Nausea:Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS E
+
+UNION ALL
+
+--q11_weakness
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_weakness = 'yes' then 4012382
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_weakness = 'yes' then 'Weakness:Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+
+
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS F
+
+
+UNION ALL
+
+--q11_sorethroat
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_sore_throat = 'yes' then 4147326
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_sore_throat = 'yes' then 'Sore_throat:Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+
+
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS G
+
+
+UNION ALL
+
+--q11_headache
+
+SELECT 1 as condition_occurrence_id, person_id, 
+case
+	when q11_headache = 'yes' then 378253
+	else 0
+end as condition_concept_id,
+created_date as condition_start_date, 
+created_date as condition_start_timestamp,
+created_date as condition_end_date, 
+created_date as condition_end_timestamp,
+4303401 as condition_type_concept_id,
+603082 as condition_status_concept_id,
+NULL as stop_reason,
+provider_id,
+1 as visit_occurrence_id,
+0 as visit_detail_id,
+case
+	when q11_headache = 'yes' then 'Headache:Yes'
+	else 'No'
+end as condition_source_value,
+0 as condition_source_concept_id,
+NULL as condition_status_source_value
+
+
+FROM (SELECT * FROM staging.serodata_two order by studyid ASC) AS G
+
+
+
+) 
+
+AS main
+WHERE main.condition_concept_id > 0 
+ORDER BY main.person_id,main.condition_concept_id
 
 
 
@@ -1073,11 +915,11 @@
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>studyid</name>
+        <name>condition_occurrence_id</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>studyid</comments>
+        <comments>condition_occurrence_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1094,14 +936,14 @@
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>q8_gender</name>
-        <length>150</length>
-        <precision>-1</precision>
+        <name>person_id</name>
+        <length>9</length>
+        <precision>0</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>q8_gender</comments>
-        <conversion_Mask/>
+        <comments>person_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1119,11 +961,11 @@
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>gender_concept_id</name>
+        <name>condition_concept_id</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>gender_concept_id</comments>
+        <comments>condition_concept_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1142,12 +984,127 @@
       <value-meta>
         <type>Date</type>
         <storagetype>normal</storagetype>
-        <name>birth_timestamp</name>
+        <name>condition_start_date</name>
         <length>-1</length>
         <precision>-1</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>birth_timestamp</comments>
+        <comments>condition_start_date</comments>
         <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>condition_start_timestamp</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table - Read staging serodata table</origin>
+        <comments>condition_start_timestamp</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>condition_end_date</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table - Read staging serodata table</origin>
+        <comments>condition_end_date</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>condition_end_timestamp</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table - Read staging serodata table</origin>
+        <comments>condition_end_timestamp</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>condition_type_concept_id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table - Read staging serodata table</origin>
+        <comments>condition_type_concept_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>condition_status_concept_id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table - Read staging serodata table</origin>
+        <comments>condition_status_concept_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1165,81 +1122,12 @@
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>death_timestamp</name>
+        <name>stop_reason</name>
         <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>death_timestamp</comments>
+        <comments>stop_reason</comments>
         <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>race_concept_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table - Read staging serodata table</origin>
-        <comments>race_concept_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ethnicity_concept_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table - Read staging serodata table</origin>
-        <comments>ethnicity_concept_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>location_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table - Read staging serodata table</origin>
-        <comments>location_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1278,14 +1166,14 @@
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>care_site_id</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
+        <name>visit_occurrence_id</name>
+        <length>9</length>
+        <precision>0</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>care_site_id</comments>
-        <conversion_Mask/>
+        <comments>visit_occurrence_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1303,11 +1191,11 @@
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>person_source_value</name>
+        <name>visit_detail_id</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>person_source_value</comments>
+        <comments>visit_detail_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1326,11 +1214,11 @@
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>gender_source_value</name>
-        <length>150</length>
+        <name>condition_source_value</name>
+        <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>gender_source_value</comments>
+        <comments>condition_source_value</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1349,11 +1237,11 @@
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>gender_source_concept_id</name>
+        <name>condition_source_concept_id</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>gender_source_concept_id</comments>
+        <comments>condition_source_concept_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1372,11 +1260,11 @@
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>race_source_value</name>
+        <name>condition_status_source_value</name>
         <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table - Read staging serodata table</origin>
-        <comments>race_source_value</comments>
+        <comments>condition_status_source_value</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1392,60 +1280,57 @@
         <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>154</xloc>
+      <yloc>191</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table - omop_6_0.condition_occurrence</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>survey_connection</connection>
+    <sql>select 
+CASE 
+WHEN max(condition_occurrence_id) IS NULL THEN 0
+ELSE max(condition_occurrence_id)
+END AS max_condition_occurrence_id
+FROM omop_6_0.condition_occurrence;
+
+
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>race_source_concept_id</name>
-        <length>9</length>
+        <name>max_condition_occurrence_id</name>
+        <length>15</length>
         <precision>0</precision>
-        <origin>Table - Read staging serodata table</origin>
-        <comments>race_source_concept_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>ethnicity_source_value</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table - Read staging serodata table</origin>
-        <comments>ethnicity_source_value</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ethnicity_source_concept_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table - Read staging serodata table</origin>
-        <comments>ethnicity_source_concept_id</comments>
+        <origin>Table - omop_6_0.person</origin>
+        <comments>max_condition_occurrence_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1471,13 +1356,628 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>160</yloc>
+      <xloc>154</xloc>
+      <yloc>399</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table - write person data </name>
+    <name>Table - omop_6_0.visit_occurrence</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>survey_connection</connection>
+    <sql>SELECT person_id, visit_occurrence_id FROM omop_6_0.visit_occurrence ORDER BY person_id ASC
+
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>person_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table - omop_6_0.visit_occurrence</origin>
+        <comments>person_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>visit_occurrence_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table - omop_6_0.visit_occurrence</origin>
+        <comments>visit_occurrence_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join - add visit_occurence</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>Calculator</step1>
+    <step2>Table - omop_6_0.visit_occurrence</step2>
+    <keys_1>
+      <key>person_id</key>
+    </keys_1>
+    <keys_2>
+      <key>person_id</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>condition_occurrence_id_1</name>
+        <rename>condition_occurrence_id</rename>
+      </field>
+      <field>
+        <name>person_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_start_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_start_timestamp</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_end_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_end_timestamp</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_type_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_status_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>stop_reason</name>
+        <rename/>
+      </field>
+      <field>
+        <name>provider_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>visit_occurrence_id_1</name>
+        <rename>visit_occurrence_id</rename>
+      </field>
+      <field>
+        <name>visit_detail_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_source_value</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_source_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_status_source_value</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1056</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>condition_occurrence_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1152</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values - Align data types</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>condition_occurrence_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>person_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_start_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_start_timestamp</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_end_date</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_end_timestamp</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_type_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_status_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>stop_reason</name>
+        <rename/>
+      </field>
+      <field>
+        <name>provider_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>visit_occurrence_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>visit_detail_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_source_value</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_source_concept_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>condition_status_source_value</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>condition_occurrence_id</name>
+        <rename>condition_occurrence_id</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_concept_id</name>
+        <rename>condition_concept_id</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_start_date</name>
+        <rename>condition_start_date</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_start_timestamp</name>
+        <rename>condition_start_timestamp</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_end_date</name>
+        <rename>condition_end_date</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_end_timestamp</name>
+        <rename>condition_end_timestamp</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_type_concept_id</name>
+        <rename>condition_type_concept_id</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_status_concept_id</name>
+        <rename>condition_status_concept_id</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>stop_reason</name>
+        <rename>stop_reason</rename>
+        <type>String</type>
+        <length>2147483647</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>provider_id</name>
+        <rename>provider_id</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>visit_occurrence_id</name>
+        <rename>visit_occurrence_id</rename>
+        <type>Integer</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>visit_detail_id</name>
+        <rename>visit_detail_id</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_source_value</name>
+        <rename>condition_source_value</rename>
+        <type>String</type>
+        <length>2147483647</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_source_concept_id</name>
+        <rename>condition_source_concept_id</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>condition_status_source_value</name>
+        <rename>condition_status_source_value</rename>
+        <type>String</type>
+        <length>2147483647</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1280</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table output - write </name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1489,7 +1989,7 @@
     </partitioning>
     <connection>survey_connection</connection>
     <schema>omop_6_0</schema>
-    <table>person</table>
+    <table>condition_occurrence</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1506,80 +2006,68 @@
     <return_field/>
     <fields>
       <field>
+        <column_name>condition_occurrence_id</column_name>
+        <stream_name>condition_occurrence_id</stream_name>
+      </field>
+      <field>
         <column_name>person_id</column_name>
         <stream_name>person_id</stream_name>
       </field>
       <field>
-        <column_name>gender_concept_id</column_name>
-        <stream_name>gender_concept_id</stream_name>
+        <column_name>condition_concept_id</column_name>
+        <stream_name>condition_concept_id</stream_name>
       </field>
       <field>
-        <column_name>year_of_birth</column_name>
-        <stream_name>year_of_birth</stream_name>
+        <column_name>condition_start_date</column_name>
+        <stream_name>condition_start_date</stream_name>
       </field>
       <field>
-        <column_name>month_of_birth</column_name>
-        <stream_name>month_of_birth</stream_name>
+        <column_name>condition_start_timestamp</column_name>
+        <stream_name>condition_start_timestamp</stream_name>
       </field>
       <field>
-        <column_name>day_of_birth</column_name>
-        <stream_name>day_of_birth</stream_name>
+        <column_name>condition_end_date</column_name>
+        <stream_name>condition_end_date</stream_name>
       </field>
       <field>
-        <column_name>birth_timestamp</column_name>
-        <stream_name>birth_timestamp</stream_name>
+        <column_name>condition_end_timestamp</column_name>
+        <stream_name>condition_end_timestamp</stream_name>
       </field>
       <field>
-        <column_name>death_timestamp</column_name>
-        <stream_name>death_timestamp</stream_name>
+        <column_name>condition_type_concept_id</column_name>
+        <stream_name>condition_type_concept_id</stream_name>
       </field>
       <field>
-        <column_name>race_concept_id</column_name>
-        <stream_name>race_concept_id</stream_name>
+        <column_name>condition_status_concept_id</column_name>
+        <stream_name>condition_status_concept_id</stream_name>
       </field>
       <field>
-        <column_name>ethnicity_concept_id</column_name>
-        <stream_name>ethnicity_concept_id</stream_name>
-      </field>
-      <field>
-        <column_name>location_id</column_name>
-        <stream_name>location_id</stream_name>
+        <column_name>stop_reason</column_name>
+        <stream_name>stop_reason</stream_name>
       </field>
       <field>
         <column_name>provider_id</column_name>
         <stream_name>provider_id</stream_name>
       </field>
       <field>
-        <column_name>care_site_id</column_name>
-        <stream_name>care_site_id</stream_name>
+        <column_name>visit_occurrence_id</column_name>
+        <stream_name>visit_occurrence_id</stream_name>
       </field>
       <field>
-        <column_name>person_source_value</column_name>
-        <stream_name>person_source_value</stream_name>
+        <column_name>visit_detail_id</column_name>
+        <stream_name>visit_detail_id</stream_name>
       </field>
       <field>
-        <column_name>gender_source_value</column_name>
-        <stream_name>gender_source_value</stream_name>
+        <column_name>condition_source_value</column_name>
+        <stream_name>condition_source_value</stream_name>
       </field>
       <field>
-        <column_name>gender_source_concept_id</column_name>
-        <stream_name>gender_source_concept_id</stream_name>
+        <column_name>condition_source_concept_id</column_name>
+        <stream_name>condition_source_concept_id</stream_name>
       </field>
       <field>
-        <column_name>race_source_value</column_name>
-        <stream_name>race_source_value</stream_name>
-      </field>
-      <field>
-        <column_name>race_source_concept_id</column_name>
-        <stream_name>race_source_concept_id</stream_name>
-      </field>
-      <field>
-        <column_name>ethnicity_source_value</column_name>
-        <stream_name>ethnicity_source_value</stream_name>
-      </field>
-      <field>
-        <column_name>ethnicity_source_concept_id</column_name>
-        <stream_name>ethnicity_source_concept_id</stream_name>
+        <column_name>condition_status_source_value</column_name>
+        <stream_name>condition_status_source_value</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1591,659 +2079,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1152</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table - omop_6_0.person</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>survey_connection</connection>
-    <sql>select 
-CASE 
-WHEN max(person_id) IS NULL THEN 0
-ELSE max(person_id)
-END AS max_person_id
-FROM omop_6_0.person;
-
-
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>max_person_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table - ${cdm_schema}.care_site</origin>
-        <comments>max_person_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Join rows (cartesian product)</name>
-    <type>JoinRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <cache_size>1000</cache_size>
-    <main/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue/>
-        <function>=</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>person_sequence</valuename>
-    <use_database>N</use_database>
-    <connection/>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>person_id</field_name>
-      <calc_type>ADD</calc_type>
-      <field_a>max_person_id</field_a>
-      <field_b>person_sequence</field_b>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>year_of_birth</field_name>
-      <calc_type>YEAR_OF_DATE</calc_type>
-      <field_a>birth_timestamp</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>month_of_birth</field_name>
-      <calc_type>MONTH_OF_DATE</calc_type>
-      <field_a>birth_timestamp</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>day_of_birth</field_name>
-      <calc_type>DAY_OF_MONTH</calc_type>
-      <field_a>birth_timestamp</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 3</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>person_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>gender_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>year_of_birth</name>
-        <rename/>
-      </field>
-      <field>
-        <name>month_of_birth</name>
-        <rename/>
-      </field>
-      <field>
-        <name>day_of_birth</name>
-        <rename/>
-      </field>
-      <field>
-        <name>birth_timestamp</name>
-        <rename/>
-      </field>
-      <field>
-        <name>death_timestamp</name>
-        <rename/>
-      </field>
-      <field>
-        <name>race_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ethnicity_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>location_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>provider_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>care_site_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>person_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>gender_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>gender_source_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>race_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>race_source_concept_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ethnicity_source_value</name>
-        <rename/>
-      </field>
-      <field>
-        <name>ethnicity_source_concept_id</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>person_id</name>
-        <rename>person_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>gender_concept_id</name>
-        <rename>gender_concept_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>year_of_birth</name>
-        <rename>year_of_birth</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>month_of_birth</name>
-        <rename>month_of_birth</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>day_of_birth</name>
-        <rename>day_of_birth</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>birth_timestamp</name>
-        <rename>birth_timestamp</rename>
-        <type>Timestamp</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>death_timestamp</name>
-        <rename>death_timestamp</rename>
-        <type>Timestamp</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>race_concept_id</name>
-        <rename>race_concept_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ethnicity_concept_id</name>
-        <rename>ethnicity_concept_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>location_id</name>
-        <rename>location_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>provider_id</name>
-        <rename>provider_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>care_site_id</name>
-        <rename>care_site_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>person_source_value</name>
-        <rename>person_source_value</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>gender_source_value</name>
-        <rename>gender_source_value</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>gender_source_concept_id</name>
-        <rename>gender_source_concept_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>race_source_value</name>
-        <rename>race_source_value</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>race_source_concept_id</name>
-        <rename>race_source_concept_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ethnicity_source_value</name>
-        <rename>ethnicity_source_value</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>ethnicity_source_concept_id</name>
-        <rename>ethnicity_source_concept_id</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>#</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1008</xloc>
-      <yloc>128</yloc>
+      <xloc>1168</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

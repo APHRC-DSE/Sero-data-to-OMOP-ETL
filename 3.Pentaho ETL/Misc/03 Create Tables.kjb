@@ -8,7 +8,7 @@
   <created_user>-</created_user>
   <created_date>2023/02/22 13:16:12.850</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2023/04/28 00:21:01.478</modified_date>
+  <modified_date>2023/05/02 14:33:37.193</modified_date>
   <parameters>
     </parameters>
   <connection>
@@ -725,6 +725,183 @@ TABLESPACE pg_default;
 
 
 --------------------------------------------------
+
+-- third staging table
+
+
+
+CREATE SCHEMA IF NOT EXISTS ${staging}
+AUTHORIZATION postgres;
+
+
+DROP TABLE IF EXISTS ${staging}.serodata_two;
+
+CREATE TABLE IF NOT EXISTS ${staging}.serodata_two
+(
+studyid	integer,
+q8_gender	character varying (150)	,
+q7_birth_date	date,
+today_date	date,
+q7_age	integer,
+age_group	character varying (150)	,
+age_strata	character varying (150)	,
+sample_type	character varying (150)	,
+q9_location	character varying (150)	,
+q5_status	character varying (150)	,
+consent	character varying (150)	,
+reason_no_consent	character varying (150)	,
+date_updated	DATE,
+created_date	DATE	,
+week	integer,
+replace	character varying (150)	,
+q6_education_level	character varying (150)	,
+q6_religion	character varying (150)	,
+q10_covid_contact	character varying (150)	,
+q10_contact_month	character varying (150)	,
+q10_contact_year	character varying (150)	,
+q11_fever	character varying (150)	,
+q11_shortness_breath	character varying (150)	,
+q11_pain	character varying (150)	,
+q11_weakness	character varying (150)	,
+q11_diarrhoea	character varying (150)	,
+q11_cough	character varying (150)	,
+q11_nausea	character varying (150)	,
+q11_sore_throat	character varying (150)	,
+q11_headache	character varying (150)	,
+q11_runny_nose	character varying (150)	,
+q11_irritability	character varying (150)	,
+q11_lost_smell	character varying (150)	,
+q11_other_symptom	character varying (150)	,
+q11_symptom_specified	character varying (150)	,
+q11_unknown	character varying (150)	,
+q11_no_symptoms	character varying (150)	,
+q11_muscular_pain	character varying (150)	,
+q11_chest_pain	character varying (150)	,
+q11_abdominal_pain	character varying (150)	,
+q11_joint_pain	character varying (150)	,
+q12_medical_attention	character varying (150)	,
+q12_miss_work	character varying (150)	,
+q12_hospitalized	character varying (150)	,
+q21_bcg_scar	character varying (150)	,
+q23_sampling	character varying (150)	,
+q16_info_edu	character varying (150)	,
+q16_hand_wash	character varying (150)	,
+q16_face_masks	character varying (150)	,
+q16_sanitizers	character varying (150)	,
+q16_own_risk	character varying (150)	,
+q13_hhmember_sick	character varying (150)	,
+q13_hhm_fever	character varying (150)	,
+q13_hhm_shortness_breath	character varying (150)	,
+q13_hhm_pain	character varying (150)	,
+q13_hhm_weakness	character varying (150)	,
+q13_hhm_diarrhoea	character varying (150)	,
+q13_hhm_cough	character varying (150)	,
+q13_hhm_nausea	character varying (150)	,
+q13_hhm_sore_throat	character varying (150)	,
+q13_hhm_headache	character varying (150)	,
+q13_hhm_runny_nose	character varying (150)	,
+q13_hhm_irritability	character varying (150)	,
+q13_hhm_lost_smell	character varying (150)	,
+q13_hhm_other_symptom	character varying (150)	,
+q13_hhm_no_symptoms	character varying (150)	,
+q13_hhm_unknown	character varying (150)	,
+q13_hhm_symptom_specified	character varying (150)	,
+q13_hhm_muscular_pain	character varying (150)	,
+q13_hhm_chest_pain	character varying (150)	,
+q13_hhm_abdominal_pain	character varying (150)	,
+q13_hhm_joint_pain	character varying (150)	,
+q13_hhm_symptoms_cause	character varying (150)	,
+q14_hhm_medical_attention	character varying (150)	,
+q14_hhm_miss_work	character varying (150)	,
+q14_hhm_hospitalized	character varying (150)	,
+q15_hhm_died	character varying (150)	,
+q17_electricity	character varying (150)	,
+q17_television	character varying (150)	,
+q17_sofa	character varying (150)	,
+q17_cupboard	character varying (150)	,
+q17_dvd_player	character varying (150)	,
+q17_radio	character varying (150)	,
+q17_tables	character varying (150)	,
+q17_clock	character varying (150)	,
+q17_none	character varying (150)	,
+q17_floor_type	character varying (150)	,
+q17_wall_type	character varying (150)	,
+q17_roof_type	character varying (150)	,
+q17_fuel_type	character varying (150)	,
+q17_toilet_type	character varying (150)	,
+q18_outmigrant_member	character varying (150)	,
+q18_outmigrant_dest	character varying (150)	,
+q18_outmigration_reason	character varying (150)	,
+q18_inmigrant_member	character varying (150)	,
+q18_inmigrant_origin	character varying (150)	,
+q18_inmigration_reason	character varying (150)	,
+q19_lost_job	character varying (150)	,
+q19_reason_joblost	character varying (150)	,
+q20_healthcare_access	character varying (150)	,
+q20_missed_service_reason	character varying (150)	,
+q20_services_missed	character varying (150)	,
+q22_vaccine_records	character varying (150)	,
+q22_reason_nocard	character varying (150)	,
+q24_sample_collected	character varying (150)	,
+fk_study	character varying (150)	,
+reason_not_collected	character varying (150)	,
+sample_date_collected	character varying (150)	,
+blood_group	character varying (150)	,
+covid_vaccine	character varying (150)	,
+covid_vac_type	character varying (150)	,
+covid_vac_type_spy	character varying (150)	,
+bcg_confirm	character varying (150)	,
+penta1_confirm	character varying (150)	,
+penta2_confirm	character varying (150)	,
+penta3_confirm	character varying (150)	,
+pcv1_confirm	character varying (150)	,
+pcv2_confirm	character varying (150)	,
+pcv3_confirm	character varying (150)	,
+mcv1_confirm	character varying (150)	,
+mcv2_confirm	character varying (150)	,
+bcg	character varying (150)	,
+penta1	character varying (150)	,
+penta2	character varying (150)	,
+penta3	character varying (150)	,
+pcv1	character varying (150)	,
+pcv2	character varying (150)	,
+pcv3	character varying (150)	,
+mcv1	character varying (150)	,
+mcv2	character varying (150)	,
+bcg_date	character varying (150)		,
+penta1_date	character varying (150)		,
+penta2_date	character varying (150)		,
+penta3_date	character varying (150)		,
+pcv1_date	character varying (150)		,
+pcv2_date	character varying (150)		,
+pcv3_date	character varying (150)		,
+mcv1_date	character varying (150)		,
+mcv2_date	character varying (150)		,
+spike_negod	REAL	,
+spikeodratio	REAL	,
+spikepos	character varying (150)	,
+latitude	REAL	,
+longitude	REAL,
+provider_id integer,
+location_id integer,
+person_id integer
+
+)
+
+TABLESPACE pg_default;
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
 
 CREATE SCHEMA IF NOT EXISTS ${survey}
 AUTHORIZATION postgres;
