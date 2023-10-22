@@ -29,6 +29,8 @@ OHDSI library for quality assurance of the CDM 'DataQualityDashboard' was instal
 
 Aggregated data(results tables), OMOP tables and vocabulary tables were integrated with Atlas and webAPI.
 
+https://github.com/OHDSI/WebAPI/wiki/CDM-Configuration
+
 7. Migration to OHDSIonAWS:
 
 Aggregated data migrated to AWS simple storage service (S3) and then to AWS Redshift database and later linked to AWS Atlas for wider audience based on access level. 
